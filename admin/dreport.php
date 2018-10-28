@@ -23,7 +23,7 @@
         Sales
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="home.php"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Collection</li>
         <li class="active">Production table</li>
       </ol>
@@ -145,13 +145,16 @@ global $endDate;
 
 <tfoot>
       <tr>
-      <?php
+    <!--   <?php
       $sqli =" SELECT SUM(noCollected) from daily_collection WHERE  tarehe 
                            between '".$fromDate."' and '".$endDate."'";
+   
 
-     ?>
+     ?> -->
 
-       <th colspan="36" align="center">Total eggs collected</th>
+
+
+       <th colspan="10" align="center">Total eggs collected</th>
   </tr>
       <tr>
       <th colspan="10" align="right">Broken</th>
@@ -161,8 +164,27 @@ global $endDate;
     <tr>
     <th colspan="10" align="right">Total Sales cost </th>
     
-    </tr>
-   </tfoot>
+      <?php
+    $total_eggs=0;
+    $hm=0;
+    
+    $q="SELECT SUM(noCollected) as total_eggs FROM daily_collection  ";
+  
+     
+  $mes=mysqli_query($q);
+  while ($qs = mysqli_fetch_array($mes)) { 
+  $qstotal=$qs['total_eggs'];
+  ?>
+    
+
+      </tr>
+          <td> <?php echo $qs['total_eggs']?></td>
+
+  <?php
+ 
+  }
+?>
+  </tfoot>
 
                 </tbody>
 

@@ -6,7 +6,7 @@
 		header('location: index.php');
 	}
 
-	$sql = "SELECT * FROM admin WHERE id = '".$_SESSION['user']."'";
+	$sql = "SELECT * FROM user WHERE id = '".$_SESSION['user']."'";
 	$query = $conn->query($sql);
 	$user = $query->fetch_assoc();
 	

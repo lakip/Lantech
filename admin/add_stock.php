@@ -12,7 +12,7 @@
 
 		$sql = "INSERT INTO stock (date,hno,bno,no) VALUES ('$dte','$hno', '$bno','$chicks')";
 		if($conn->query($sql)){
-			$_SESSION['success'] = ' daily collection recorded successfully';
+			$_SESSION['success'] = 'daily collection recorded successfully';
 		}
 		else{
 			$_SESSION['error'] = $conn->error;

@@ -20,12 +20,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Stock
+        Purchase
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Collection</li>
-        <li class="active">Buyer`s Details</li>
+        <li class="active">Purchase Details</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -73,22 +73,23 @@
                   <th>ID Number</th>
                   <th>Number of Eggs</th>
                   <th>Payment Mode</th>
-                  <th>Amount Paid</th>
+<!--                   <th>MPESA CODE</th>
+ -->                  <th>Amount Paid</th>
                 </thead>
                 <tbody>
                   
       <?php
-$sql = "SELECT * FROM buyer";
+$sql = "SELECT * FROM purchases";
 
    $query = $conn->query($sql);
                    while ($row=mysqli_fetch_array($query)) {?>
                      <!-- 
                       echo " -->
                         <tr>
-                          <td><?php echo $row['date']?></td>
-                          <td><?php echo $row['name']?></td>
+                          <td><?php echo $row['dte']?></td>
+                          <td><?php echo $row['fname']." ". $row['lname']?></td>
                            <td><?php echo $row['idno']?></td>
-                            <td><?php echo $row['bought']?></td>
+                            <td><?php echo $row['number_bought']?></td>
                             <td><?php echo $row['mop']?></td>
                             <td><?php echo $row['amount']?></td>
                             

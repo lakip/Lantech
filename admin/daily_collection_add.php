@@ -1,5 +1,7 @@
 <?php
 	include 'includes/conn.php';
+		include 'includes/session.php';
+
 
 	if(isset($_POST['add'])){
 		$dte=$_POST['dte'];
@@ -11,11 +13,17 @@
 
 
 		$sql = "INSERT INTO daily_collection (tarehe,hno,bno,noCollected,broken) VALUES ('$dte','$hno', '$bno','$eggs','$broken')";
+		 if($conn->query($sql)){
+		 	$_SESSION['success'] = ' daily collection recorded successfully';
+		
+
 		if($conn->query($sql)){
-			$_SESSION['success'] = ' daily collection recorded successfully';
-		}
-		else{
-			$_SESSION['error'] = $conn->error;
+				$_SESSION['success'] = 'recorded successfully';
+			}
+				else{
+					$_SESSION['error'] = $conn->error;
+				}
+
 		}
 	}
 	else{
@@ -27,3 +35,5 @@
 	header('location: record_dailly.php');
 
 ?>
+
+	

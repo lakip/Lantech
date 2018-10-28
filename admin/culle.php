@@ -98,7 +98,7 @@ $sql = "SELECT * FROM stock";
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'add_stock_modal.php'; ?>
+  <?php include 'stock_update.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>

@@ -1,4 +1,4 @@
-<?php include 'includes/session.php'; ?>
+<!-- <?php include 'includes/session.php'; ?>
 <?php
   $catid = 0;
   $where = '';
@@ -7,7 +7,7 @@
     $where = 'WHERE stockng.category_id = '.$catid;
   }
 
-?>
+?> -->
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -20,7 +20,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Notification
+        Add date for Notification
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -30,20 +30,7 @@
     </section>
     <!-- Main content -->
     <section class="content" align="center">
-    
-
- <?php
-	
-	 $count=0;
-	 if(!empty($_POST['add'])) {
-	 	$date = mysqli_real_escape_string($conn,$_POST["date"]);
-	 	$hno = mysqli_real_escape_string($conn,$_POST["hno"]);
-	 	$bno = mysqli_real_escape_string($conn,$_POST["bno"]);
-	 	$comment = mysqli_real_escape_string($conn,$_POST["comment"]);	
-     	$sql = "INSERT INTO notification (date,hno,bno,comment) VALUES('" . $date . "','" . $hno . "','" . $bno . "','" . $comment . "')";
-	 	mysqli_query($conn, $sql);
-	 }
-	 ?>
+  
 	<div class="demo-content">
 		
 
@@ -57,12 +44,36 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
  
 </head>
-   <form class="form-horizontal" method="POST" action="#.php">
+<section class="content">
+      <?php
+        if(isset($_SESSION['error'])){
+          echo "
+            <div class='alert alert-danger alert-dismissible'>
+              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+              <h4><i class='icon fa fa-warning'></i> Error!</h4>
+              ".$_SESSION['error']."
+            </div>
+          ";
+          unset($_SESSION['error']);
+        }
+        if(isset($_SESSION['success'])){
+          echo "
+            <div class='alert alert-success alert-dismissible'>
+              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+              <h4><i class='icon fa fa-check'></i> Success!</h4>
+              ".$_SESSION['success']."
+            </div>
+          ";
+          unset($_SESSION['success']);
+        }
+      ?>
+   
+   <form class="form-horizontal" method="POST">
                 <div class="form-group">
                     <label for="isbn" class="col-sm-3 control-label">Date</label>
 
                     <div class="col-sm-5">
-                      <input type="date" class="form-control" id="dte" name="dte" required>
+                      <input type="date" class="form-control" id="date" name="dte" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -101,7 +112,7 @@
                 </div>
                   <div>
               <button type="button" class="btn btn-default btn-flat"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
+              <button type="submit" class="btn btn-primary btn-flat" id="add" name="add"><i class="fa fa-save"></i> Save</button>
                 </div>
     </form>
 </div></section></div>
@@ -109,7 +120,56 @@
   <?php include 'includes/footer.php'; ?>
   <?php include 'buyer_modal.php'; ?>
 </div>
+
+  
+
+
+<?php
+  include 'includes/conn.php';
+
+  if(isset($_POST['add'])){
+    $date =$_POST["date"];
+    $hno =$_POST["hno"];
+    $bno =$_POST["bno"];
+    $comment =$_POST["comment"];  
+      $sql = "INSERT INTO notification (dte,hno,bno,comment) VALUES('$date','$hno','$bno','$comment')";
+    if($conn->query($sql)){
+        $_SESSION['success'] = 'recorded successfully';
+      }
+        else{
+          $_SESSION['error'] = $conn->error;
+        }
+      }
+
+
+?>
+
+  
+
+
 <?php include 'includes/scripts.php'; ?>
+<script type="text/javascript">
+  function myFunction() {
+    $.ajax({
+      url: "view_notification.php",
+      type: "POST",
+      processData:false,
+      success: function(data){
+        $("#notification-count").remove();          
+        $("#notification-latest").show();$("#notification-latest").html(data);
+      },
+      error: function(){}           
+    });
+   }
+   
+   $(document).ready(function() {
+    $('body').click(function(e){
+      if ( e.target.id != 'notification-icon'){
+        $("#notification-latest").hide();
+      }
+    });
+  });    
+</script>
 <script>
 $(function(){
   $('#select_category').change(function(){

@@ -1,22 +1,33 @@
 <?php
 	include 'includes/conn.php';
+			include 'includes/session.php';
 
-	if(isset($_POST['add'])){
-		$bname=$_POST['bname'];
-		$date=$_POST['date'];
+
+	if(isset($_POST['Save'])){
+
+		$dte=$_POST['dte'];
+		$fname=$_POST['fname'];
+		$lname=$_POST['lname'];
+
 		$idno = $_POST['idno'];
-		$bought = $_POST['bought'];
-		$MOP=$_POST['MOP'];
+		$number_bought=$_POST['number_bought'];
+		$mop=$_POST['mop'];
+		$mpesa_code=$_POST['mpesa_code'];
 		$amount=$_POST['amount'];
+
+		$sql = "INSERT INTO purchases (dte, fname, lname, idno, number_bought,mop,mpesa_code,amount)
+		                        VALUES ('$dte','$fname','$lname','$idno','$number_bought','$mop','$mpesa_code','$amount')";
+		 if($conn->query($sql)){
+		 	$_SESSION['success'] = 'Purchase captured successfully';
 		
 
-
-		$sql = "INSERT INTO buyer (`date`, `name`, `idno`, `bought`, `mop`, `amount`) VALUES ('$date','$bname','$idno','$bought','$MOP','$amount')";
 		if($conn->query($sql)){
-			$_SESSION['success'] = ' daily collection recorded successfully';
-		}
-		else{
-			$_SESSION['error'] = $conn->error;
+				$_SESSION['success'] = 'recorded successfully';
+			}
+				else{
+					$_SESSION['error'] = $conn->error;
+				}
+
 		}
 	}
 	else{

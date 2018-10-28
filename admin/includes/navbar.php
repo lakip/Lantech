@@ -8,6 +8,44 @@
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
       <span class="sr-only">Toggle navigation</span>
     </a>
+<div id="notification-header">
+         <div style="position:relative">
+         <button id="notification-icon" name="button" onclick="myFunction()" class="dropbtn"><span id="notification-count"><?php
+include "includes/conn.php";
+
+$sql2="SELECT * FROM notification status = 0 ";
+   $result=mysqli_query($conn, $sql2);
+//$count=mysqli_num_rows($result);
+
+?>
+<script type="text/javascript">
+
+  function myFunction() {
+    $.ajax({
+      url: "view_notification.php",
+      type: "POST",
+      processData:false,
+      success: function(data){
+        $("#notification-count").remove();          
+        $("#notification-latest").show();$("#notification-latest").html(data);
+      },
+      error: function(){}           
+    });
+   }
+   
+   $(document).ready(function() {
+    $('body').click(function(e){
+      if ( e.target.id != 'notification-icon'){
+        $("#notification-latest").hide();
+      }
+    });
+  });
+     
+  </script>
+<span align="center"><img src="notification-icon.png" /></button></span>
+         <div id="notification-latest"></div>
+        </div>      
+    </div>
 
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
@@ -24,7 +62,6 @@
 
               <p>
                 <?php echo $user['firstname'].' '.$user['lastname']; ?>
-                <small>Member since <?php echo date('M. Y', strtotime($user['created_on'])); ?></small>
               </p>
             </li>
             <li class="user-footer">

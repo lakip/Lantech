@@ -1,6 +1,6 @@
-<?php include 'includes/session.php'; ?>
 
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -20,8 +20,8 @@
         <li class="active">Stock table</li>
       </ol>
     </section>
-    <!-- Main content -->
-    <section class="content">
+
+<section class="content">
       <?php
         if(isset($_SESSION['error'])){
           echo "
@@ -44,6 +44,10 @@
           unset($_SESSION['success']);
         }
       ?>
+   
+
+    <!-- Main content -->
+  
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -68,7 +72,7 @@
                 <tbody> 
                   <?php
                   include 'includes/conn.php';
-$sql = "SELECT * FROM stock";
+           $sql = "SELECT * FROM stock";
                   $query = $conn->query($sql);
                    while ($row=mysqli_fetch_array($query)) {?>
                      <!-- 

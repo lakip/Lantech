@@ -31,6 +31,20 @@
 
         </ul>
       </li>
+        <li class="treeview">
+        <a href="#">
+          <i class="fa fa-cart-arrow-down"></i>
+          <span>Orders</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="orders.php"><i class="  fa fa-eye"></i> view orders</a></li>
+          <li><a href="order_list.php"><i class="  fa fa-eye"></i> Order List</a></li>
+          
+        </ul>
+      </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-keyboard-o"></i>
@@ -41,7 +55,8 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="stockng.php"><i class="fa fa-upload"></i> add stock $ culling</a></li>
-          
+          <li><a href="stock_per_house.php"><i class="fa fa-upload"></i> Stock per house</a></li>
+
         </ul>
       </li>
       <li class="treeview">
@@ -66,8 +81,6 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="dreport.php"><i class="fa fa-chart-o"></i> Weekly</a></li>
-          <li><a href="#.php"><i class="fa fa-circle-o"></i> Monthly</a></li>
-          <li><a href="#.php"><i class="fa fa-circle-o"></i> Yearly</a></li>
         </ul>
       </li>
 
@@ -95,7 +108,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="#.php"><i class="fa fa-circle-o"></i> user management</a></li>
+          <li><a href="user_management.php"><i class="fa fa-circle-o"></i> user management</a></li>
           
         </ul>
       </li>
@@ -104,44 +117,7 @@
          <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
-<div id="notification-header">
-         <div style="position:relative">
-         <button id="notification-icon" name="button" onclick="myFunction()" class="dropbtn"><span id="notification-count"><?php
-include "includes/conn.php";
 
-$sql2="SELECT * FROM notification status = 0 ";
-   $result=mysqli_query($conn, $sql2);
-//$count=mysqli_num_rows($result);
-
-?>
-<script type="text/javascript">
-
-  function myFunction() {
-    $.ajax({
-      url: "view_notification.php",
-      type: "POST",
-      processData:false,
-      success: function(data){
-        $("#notification-count").remove();          
-        $("#notification-latest").show();$("#notification-latest").html(data);
-      },
-      error: function(){}           
-    });
-   }
-   
-   $(document).ready(function() {
-    $('body').click(function(e){
-      if ( e.target.id != 'notification-icon'){
-        $("#notification-latest").hide();
-      }
-    });
-  });
-     
-  </script>
-</span><img src="notification-icon.png" /></button>
-         <div id="notification-latest"></div>
-        </div>      
-    </div>
  </li>
 
         </ul>
